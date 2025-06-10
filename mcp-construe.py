@@ -37,7 +37,12 @@ def load_config() -> Dict[str, Any]:
 @mcp.tool(
     name="fetch_context",
     description="Load context files from Obsidian vault by context type - specify 'personal', 'work', or any custom context",
-    tags={"obsidian", "context", "load"}
+    tags={"obsidian", "context", "load"},
+    annotations={
+        "author": "https://github.com/mattjoyce/mcp-construe",
+        "version": "1.0.0",
+        "category": "knowledge-management"
+    }
 )
 def fetch_context(context_type: str) -> str:
     """
@@ -62,9 +67,14 @@ def fetch_context(context_type: str) -> str:
         # Use the context_type parameter to filter by context property
         properties = {"context": context_type}
         tags = []
-        
+        context="""---
+        Read and understand. When you are ready, simple acknowledge with a concise statement like "Ready to proceed."
+        Wait for further instructions.
+        ---"""
         matching_files = obsidian_utils.find_matching_files(vault_path, properties, tags)
-        return obsidian_utils.concatenate_files(matching_files)
+        context+=obsidian_utils.concatenate_files(matching_files)
+
+        return context
         
     except Exception as e:
         return f"Error fetching {context_type} context: {str(e)}"
@@ -73,7 +83,12 @@ def fetch_context(context_type: str) -> str:
 @mcp.tool(
     name="fetch_matching_files", 
     description="Fetch files from Obsidian vault matching custom properties and tags criteria",
-    tags={"obsidian", "search", "filter"}
+    tags={"obsidian", "search", "filter"},
+    annotations={
+        "author": "https://github.com/mattjoyce/mcp-construe",
+        "version": "1.0.0",
+        "category": "knowledge-management",
+    }
 )
 def fetch_matching_files(
     properties: Dict[str, Any] = None,
@@ -105,7 +120,11 @@ def fetch_matching_files(
         tags = tags or []
         
         matching_files = obsidian_utils.find_matching_files(vault_path, properties, tags, match_all_tags)
-        return obsidian_utils.concatenate_files(matching_files)
+        context=obsidian_utils.concatenate_files(matching_files)
+        context=context + """---
+        Read and understand. Whenyou are ready, simple acknowledge with "Ready to proceed."
+        ---"""
+        return context
         
     except Exception as e:
         return f"Error fetching matching files: {str(e)}"
