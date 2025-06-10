@@ -1,0 +1,15 @@
+# Construe Configuration
+# Configuration for the Obsidian Context MCP Server
+
+# Path to your Obsidian vault (supports ~ for home directory)
+vault_path: "/mnt/w/Google Drive/Obsidian/v1/v1/"
+
+# Default context criteria for fetch_personal_context()
+default_context:
+  properties:
+    context: "personal"
+  tags: []
+
+# Optional: You can add other configurations here for future features
+# max_files: 100
+# excluded_paths: [".obsidian", ".trash"]

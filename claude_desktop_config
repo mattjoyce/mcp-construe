@@ -1,0 +1,8 @@
+        "fetch-context": {
+            "command": "path-to-venv-python",
+            "args": [
+				"path-to\\mcp-construe.py",
+				"--config", 
+				"path-to\\your-config.yaml"
+           ]
+        }	
